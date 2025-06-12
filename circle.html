@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>簡易抽獎</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .pointer {
+      height: 100px;
+      width: 100px;
+      background-color: #ffacd5;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 50%;
+      border: 2px solid #ff4d88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: transform 3s cubic-bezier(.2,.93,.43,1);
+    }
+
+    .pointer:hover {
+      background-color: #ff82b2;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #d50000;
+      font-weight: bold;
+    }
+
+    .options {
+      margin-top: 30px;
+    }
+
+    .options div {
+      margin: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pointer" id="drawBtn">Start</div>
+  <div class="result" id="resultDisplay"></div>
+
+  <div class="options">
+    <div><input type="checkbox" value="🍴西式"> 🍴西式</div>
+    <div><input type="checkbox" value="🥢中式"> 🥢中式</div>
+    <div><input type="checkbox" value="🥬素食"> 🥬素食</div>
+    <div><input type="checkbox" value="🧋飲料店"> 🧋飲料店</div>
+    <div><input type="checkbox" value="🧁甜點店"> 🧁甜點店</div>
+    <div><input type="checkbox" value="🀄️中成特約"> 🀄️中成特約</div>
+  </div>
+
+  <script>
+    const drawBtn = document.getElementById('drawBtn');
+    const resultDisplay = document.getElementById('resultDisplay');
+
+    let isSpinning = false;
+
+    drawBtn.addEventListener('click', () => {
+      if (isSpinning) return;
+      isSpinning = true;
+
+      // 取得勾選的選項
+      const checkedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                                   .map(cb => cb.value);
+
+      if (checkedOptions.length === 0) {
+        resultDisplay.innerText = "請先選擇選項";
+        isSpinning = false;
+        return;
+      }
+
+      // 轉動動畫
+      drawBtn.style.transform = `rotateZ(${Math.random() * 360 + 1080}deg)`;
+
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * checkedOptions.length);
+        const result = checkedOptions[randomIndex];
+        resultDisplay.innerText = `🎉 恭喜獲得：${result}`;
+        drawBtn.style.transform = 'none';
+        isSpinning = false;
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
+
