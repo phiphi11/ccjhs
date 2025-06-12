@@ -61,9 +61,52 @@
       left: 605px;
     }
 
+    .square {
+      position: fixed;      /* 固定位置 */
+      bottom: 20px;         /* 距離底部 20px */
+      right: 20px;          /* 距離右邊 20px */
+      width: 100px;         /* 正方形寬度 */
+      height: 100px;        /* 正方形高度 */
+      background-color: #ffacd5; /* 正方形顏色，可以改為圖片背景 */
+      z-index: 1000;        /* 確保不被其他元素蓋住 */
+      border-radius: 8px;   /* 選擇性：圓角 */
+    }
+
+    .square {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: 100px;
+      background-color: #ffacd5; /* 橘紅色背景 */
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 999;
+      user-select: none;
+    }
+
+    .square:hover {
+      background-color: #ffacd5;
+    }
+
   </style>
 </head>
 <body>
+  
+  <div class="square" onclick="openLocalFile()">轉盤</div>
+
+  <script>
+    function openLocalFile() {
+    window.location.href = 'circle.html';
+    }
+  </script>
 
   <div class="map-container">
     <img src="IMG_8713.jpeg" alt="地圖">
